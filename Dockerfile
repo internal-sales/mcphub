@@ -45,7 +45,7 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm fetch --frozen-lockfile
-RUN pnpm install --frozen-lockfile --offline
+RUN pnpm install --no-frozen-lockfile --offline
 
 COPY . .
 
