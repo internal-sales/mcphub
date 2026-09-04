@@ -44,10 +44,8 @@ RUN uv tool install mcp-server-fetch
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
-  pnpm config set store-dir /pnpm/store && pnpm fetch --frozen-lockfile
-RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
-  pnpm config set store-dir /pnpm/store && pnpm install --frozen-lockfile --offline
+RUN pnpm fetch --frozen-lockfile
+RUN pnpm install --frozen-lockfile --offline
 
 COPY . .
 
