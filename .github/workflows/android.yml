@@ -19,11 +19,16 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Create Missing Workspace Paths
+        run: |
+          mkdir -p dist
+          touch dist/index.html
+          mkdir -p android/app/src/main/assets/public
+
       - name: Install Project Dependencies
         run: npm install
 
       - name: Sync Capacitor Configurations
-        run: mkdir -p android/app/src/main/assets
         run: npx cap sync android
 
       - name: Compile Enterprise Debug APK
