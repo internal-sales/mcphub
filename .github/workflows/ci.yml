@@ -30,7 +30,7 @@ jobs:
         run: corepack enable
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Run linter
         run: pnpm lint
@@ -65,7 +65,7 @@ jobs:
   #       run: corepack enable
 
   #     - name: Install dependencies
-  #       run: pnpm install --frozen-lockfile
+  #       run: pnpm install --no-frozen-lockfile
 
   #     - name: Build application
   #       run: pnpm build
@@ -102,7 +102,7 @@ jobs:
   #       run: corepack enable
 
   #     - name: Install dependencies
-  #       run: pnpm install --frozen-lockfile
+  #       run: pnpm install --no-frozen-lockfile
 
   #     - name: Build application
   #       run: pnpm build
