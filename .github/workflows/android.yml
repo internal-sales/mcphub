@@ -1,0 +1,38 @@
+name: Build Android APK
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java Environment
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Project Dependencies
+        run: npm install
+
+      - name: Sync Capacitor Configurations
+        run: npx cap sync android
+
+      - name: Compile Enterprise Debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Export APK Output File
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcphub-application-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
